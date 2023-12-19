@@ -1,10 +1,5 @@
+import { AuthProvider, useAuth } from '@/providers/authProvide';
 import { Ionicons } from '@expo/vector-icons';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
@@ -46,13 +41,24 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
+  );
 }
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   const router = useRouter();
+  const { isLoading, session } = useAuth();
+
+  useEffect(() => {
+    if (isLoading && !session) {
+      router.push('/(modals)/login');
+    }
+  }, [isLoading, session]);
 
   return (
     <Stack>
