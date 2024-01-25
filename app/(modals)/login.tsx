@@ -10,6 +10,7 @@ import { useWarmBrowser } from '@/hooks/useWarmBrowser';
 import { defaultStyles } from '@/constants/Styles';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const LoginScreen = () => {
   useWarmBrowser();
@@ -20,7 +21,10 @@ const LoginScreen = () => {
         placeholder="Email"
         style={[defaultStyles.inputField, { marginBottom: 30 }]}
       />
-      <TouchableOpacity style={defaultStyles.btn}>
+      <TouchableOpacity
+        style={defaultStyles.btn}
+        onPress={() => router.push('/(tabs)')}
+      >
         <Text style={defaultStyles.btnText}>Login</Text>
       </TouchableOpacity>
       <View style={styles.seperatorView}>
