@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { defaultStyles } from '@/constants/Styles';
 import { ListingGeo } from '@/interfaces/listingGeo';
@@ -17,7 +17,7 @@ const INITIAL_REGION = {
   longitudeDelta: 0.0421,
 };
 
-const ListingsMap = ({ listings }: ListingsMapProps) => {
+const ListingsMap = memo(({ listings }: ListingsMapProps) => {
   const router = useRouter();
 
   let onMarkerSelector = (item: ListingGeo) => {
@@ -75,7 +75,7 @@ const ListingsMap = ({ listings }: ListingsMapProps) => {
       </MapView>
     </View>
   );
-};
+});
 
 export default ListingsMap;
 

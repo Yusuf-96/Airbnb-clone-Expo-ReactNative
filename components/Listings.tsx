@@ -13,15 +13,27 @@ import { Link } from 'expo-router';
 import { Listing } from '@/interfaces/listing';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
+import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
 
 interface Props {
   listings: any[];
   category: string;
+  refresh: number;
 }
 
-const Listings: React.FC<Props> = ({ listings: items, category }: Props) => {
+const Listings: React.FC<Props> = ({
+  listings: items,
+  category,
+  refresh,
+}: Props) => {
   const [loading, setLoading] = useState(false);
-  const listRef = useRef<FlatList>(null);
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
+
+  useEffect(() => {
+    if (refresh) {
+      listRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }
+  }, [refresh]);
 
   useEffect(() => {
     setLoading(true);
@@ -73,10 +85,11 @@ const Listings: React.FC<Props> = ({ listings: items, category }: Props) => {
 
   return (
     <View style={defaultStyles.container}>
-      <FlatList
+      <BottomSheetFlatList
         renderItem={renderRow}
         ref={listRef}
         data={loading ? [] : items}
+        ListHeaderComponent={<Text style={styles.info}>{items.length}</Text>}
       />
     </View>
   );
@@ -94,5 +107,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     borderRadius: 16,
+  },
+  info: {
+    textAlign: 'center',
+    fontFamily: 'mon-semi',
+    fontSize: 16,
+    marginTop: 4,
   },
 });
