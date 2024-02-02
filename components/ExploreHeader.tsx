@@ -11,6 +11,7 @@ import { Link } from 'expo-router';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import * as Haptics from 'expo-haptics';
+import device from '@/constants/device';
 
 const categories = [
   {
@@ -67,7 +68,13 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingTop: device.ios ? 10 : 40,
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.actionRow}>
           <Link href={'/(modals)/booking'} asChild>
