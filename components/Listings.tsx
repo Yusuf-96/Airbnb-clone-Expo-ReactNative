@@ -13,10 +13,13 @@ import { Link } from 'expo-router';
 import { Listing } from '@/interfaces/listing';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
-import { BottomSheetFlatList, BottomSheetFlatListMethods } from '@gorhom/bottom-sheet';
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+} from '@gorhom/bottom-sheet';
 
 interface Props {
-  listings: any[];
+  listings: Listing[];
   category: string;
   refresh: number;
 }
@@ -89,7 +92,11 @@ const Listings: React.FC<Props> = ({
         renderItem={renderRow}
         ref={listRef}
         data={loading ? [] : items}
-        ListHeaderComponent={<Text style={styles.info}>{items.length}</Text>}
+        ListHeaderComponent={
+          <Text style={styles.info}>
+            {items.length} {category}
+          </Text>
+        }
       />
     </View>
   );

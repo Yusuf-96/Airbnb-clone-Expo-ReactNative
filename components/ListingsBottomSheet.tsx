@@ -8,11 +8,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
-  listings: any[];
+  listings: Listing[];
   category: string;
 }
 
-const ListingsBottomSheet = ({ listings, category }: Props) => {
+const ListingsBottomSheet: React.FC<Props> = ({ listings, category }: Props) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [refresh, setRefresh] = useState(0);
 
