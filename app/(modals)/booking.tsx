@@ -20,7 +20,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import { places } from '@/assets/data/place';
 
-//@ts-ignore
+// @ts-ignore
 import DatePicker from 'react-native-modern-datepicker';
 
 const AnimatedTouchableOpacity =
